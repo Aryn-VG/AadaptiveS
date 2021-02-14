@@ -18,7 +18,7 @@ We use the dense `npy` format to save the features in binary format. If edge fea
 * Step1 :
 
 ```{bash}
-python process.py  --data wikipedia/reddit
+python preprocess_csv.py  --data wikipedia/reddit
 ```
 
 * Step2:
