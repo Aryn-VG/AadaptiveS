@@ -27,25 +27,6 @@ python preprocess_csv.py  --data wikipedia/reddit
 python BuildDglGraph.py --data wikipedia/reddit
 ```
 
-
-
-#### Use your own data
-
-Put your data under `processed` folder. The required input data includes `ml_${DATA_NAME}.csv`, `ml_${DATA_NAME}.npy` and `ml_${DATA_NAME}_node.npy`. They store the edge linkages, edge features and node features respectively. 
-
-The `CSV` file has following columns
-
-```
-u, i, ts, label, idx
-```
-
-, which represents source node index, target node index, time stamp, edge label and the edge index. 
-
-`ml_${DATA_NAME}.npy` has shape of [#temporal edges + 1, edge features dimention]. Similarly, `ml_${DATA_NAME}_node.npy` has shape of [#nodes + 1, node features dimension].
-
-
-All node index starts from `1`. The zero index is reserved for `null` during padding operations. So the maximum of node index equals to the total number of nodes. Similarly, maxinum of edge index equals to the total number of temporal edges. The padding embeddings or the null embeddings is a vector of zeros.
-
 ### Requirements
 
 * python>=3.7
