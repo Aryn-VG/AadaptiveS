@@ -62,7 +62,7 @@ def eval_epoch(args,g, dataloader, attn,decoder,bandi_sampler,loss_fcn, device,n
             g.ndata['last_update'][pos_graph.ndata[dgl.NID][:num_pos_nodes]] = pos_ts.to('cpu')
             g.edata['q_ij'][blocks[-1].edata['eid']] = blocks[-1].edata['q_ij'].cpu()
             g.edata['weight'][blocks[-1].edata['eid']] = blocks[-1].edata['weight'].cpu()
-            g.ndata['h'][pos_graph.ndata[dgl.NID]] = emb.to('cpu')
+            #g.ndata['h'][pos_graph.ndata[dgl.NID]] = emb.to('cpu')
             if 'LP' in args.tasks:
                 pred = logits.sigmoid() > 0.5
                 m_ap.append(average_precision(logits, labels).cpu().numpy())

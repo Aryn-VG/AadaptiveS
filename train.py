@@ -11,7 +11,7 @@ from bandi_sampler import bandisampler
 
 if __name__ == '__main__':
     args = get_args()
-    args.tasks = 'NC'
+    args.tasks = 'LP'
 
     #the path of data
     g = load_graphs(f"wiki_ppc.dgl")[0][0]
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     g.edata['eid'] = eid_of_g
 
     #training
-    for i in range(15):
+    for i in range(args.n_epoch):
         init_embedding(g)
         g.ndata['last_update'] = t0
         g.apply_edges(init_qij)
@@ -95,7 +95,7 @@ if __name__ == '__main__':
                 g.ndata['last_update'][pos_graph.ndata[dgl.NID][:num_pos_nodes]] = pos_ts.to('cpu')
                 g.edata['q_ij'][blocks[-1].edata['eid']] = blocks[-1].edata['q_ij'].cpu()
                 g.edata['weight'][blocks[-1].edata['eid']] = blocks[-1].edata['weight'].cpu()
-                g.ndata['h'][pos_graph.ndata[dgl.NID]] = emb.to('cpu')
+                #g.ndata['h'][pos_graph.ndata[dgl.NID]] = emb.to('cpu')
         val_ap, val_auc, val_acc, val_loss ,time_c= eval_epoch(args,g, val_loader, emb_updater, decoder,
                                                         bandi_sampler,loss_fcn, device,val_num)#评估验证集
         print("epoch:%d,loss:%f,ap:%f,time_consume:%f" % (i, val_loss, val_ap,time_c))
